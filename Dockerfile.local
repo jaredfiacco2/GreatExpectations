@@ -1,0 +1,17 @@
+FROM ubuntu:22.04
+LABEL author='Jared Fiacco'
+
+RUN apt-get update -y && \
+    apt install software-properties-common -y && \
+    apt-get install python3 python3-pip -y && \
+    # apt-get install curl git -y && \
+    python3 -m pip install --upgrade pip
+
+RUN pip install great_expectations pyarrow fastparquet
+
+WORKDIR /app
+
+
+#RUN git clone https://<some-repo>
+
+CMD ["jupyter", "notebook", "--allow-root", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
